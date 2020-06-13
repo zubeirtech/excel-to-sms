@@ -1,0 +1,37 @@
+<style>
+  #col {
+    max-width: 450px;
+  }
+</style>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="ui container">
+  <div class="ui center aligned grid">
+    <div class="sixteen wide column" id="col">
+      <h2 class="ui large header">Login</h2>
+      <div class="ui raised segment">
+        <div class="ui form">
+          <div class="required field">
+            <label for="">Username</label>
+            {{input value=this.username placeholder="Enter username"}}
+          </div>
+          <div class="required field">
+            <label for="">Password</label>
+            {{input value=this.password placeholder="Enter password" }}
+          </div>
+          <br>
+          <div class="field">
+            <button class="ui fluid green button" {{action "login"}}>
+              Login
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

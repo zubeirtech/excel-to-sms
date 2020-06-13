@@ -1,5 +1,16 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
-
+<div class="ui inverted borderless top fixed huge menu">
+  <div class="ui container">
+    <a class="item" href="/">
+      Excel To Sms
+    </a>
+    <div class="right menu">
+      {{#if session.isAuthenticated}}
+      {{else}}
+        {{#link-to "login" class="item"}}
+          <button class="ui green button">Login</button>
+        {{/link-to}}
+      {{/if}}
+    </div>
+  </div>
+</div>
 {{outlet}}
