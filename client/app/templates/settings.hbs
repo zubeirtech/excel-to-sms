@@ -1,1 +1,31 @@
-{{outlet}}
+{{!-- template-lint-disable no-unused-block-params --}}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="ui container">
+  <div class="ui raised segment">
+    <h1 class="ui dividing header">Settings</h1>
+    <button class="ui green button">
+      <i class="save icon"></i> Save
+    </button>
+    <br>
+    <br>
+    <div class="ui compact form">
+      <div class="ui small dividing header">Change username or password</div>
+      <div class="field">
+        <label for="">Username</label>
+        {{input value=username placeholder="Enter username..."}}
+      </div>
+      <div class="field">
+        <label for="">Password</label>
+        {{input value=password placeholder="Enter password..." type="password"}}
+      </div>
+    </div>
+  </div>
+</div>
