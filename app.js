@@ -82,8 +82,11 @@ app.post('/send-sms', async (req, res) => {
         const filePath = `./files/${fileName}`;
 
         
-        const nums = await extractExcel("Book.xlsx");
-        console.log(nums);
+        extractExcel("Book.xlsx").then(nums => {
+            console.log(nums);
+            
+            //sendSms(nums);
+        });
         fs.unlinkSync(filePath, (err) => {
             if (err) {
               console.error(err)
@@ -91,7 +94,6 @@ app.post('/send-sms', async (req, res) => {
             }    
         })
         res.status(200).send({message: "Done"});
-        //sendSms();
 
     } catch (error) {
         throw error;
