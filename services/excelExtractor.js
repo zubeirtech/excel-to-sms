@@ -2,7 +2,6 @@ const xlsxFile = require('read-excel-file/node');
 
 
 module.exports = {
-    
     async extractExcel(fileName) {
         const numbers = [];
         await xlsxFile(`./files/${fileName}`).then((rows) => {
