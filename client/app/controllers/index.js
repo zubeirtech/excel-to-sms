@@ -19,9 +19,14 @@ export default Controller.extend({
           const uplRes = yield image.upload(`${ENV.host}/upload`);
           console.log(uplRes);
           
-
           if(uplRes.body.success) {
             this.toast.success("Successfully uploaded file", "Upload done");
+            const res = yield this.ajax.request(`${ENV.host}/send-sms`, {
+              method: 'POST',
+              data: {
+                fileName: image.name
+              }
+            })
           }
           set(this, "image", "");
           set(this, "loader", false);

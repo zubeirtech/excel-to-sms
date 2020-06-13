@@ -79,6 +79,19 @@ app.post('/upload', async (req, res) => {
 app.post('/send-sms', async (req, res) => {
     try {
         const { fileName } = req.body;
+        const filePath = `./files/${fileName}`;
+
+        
+        const nums = await extractExcel("Book.xlsx");
+        console.log(nums);
+        fs.unlinkSync(filePath, (err) => {
+            if (err) {
+              console.error(err)
+              return
+            }    
+        })
+        res.status(200).send({message: "Done"});
+        //sendSms();
 
     } catch (error) {
         throw error;
