@@ -9,8 +9,7 @@ module.exports = {
             rows.forEach(col => {                
                 numbers.push(col[0].toString());
             });
-        });
-
-        return numbers;
+        })            
+        return numbers.join(",");
     }
 }
