@@ -29,7 +29,7 @@ app.post('/token', async (req, res) => {
         if (grant_type === 'password') {
             if(username === db.username && password === db.password) {
                 const payload = {
-                    secret: "addis"
+                    secret: process.env.SECRET
                 }
                 const token = await jwt.sign(payload, process.env.JWT_SECRET);
                 res.status(200).send(`{ "access_token": "${token}"}`);

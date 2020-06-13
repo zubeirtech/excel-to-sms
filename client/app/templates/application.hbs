@@ -1,4 +1,4 @@
-<div class="ui inverted borderless top fixed huge menu">
+<div class="ui inverted borderless top fixed stackable menu">
   <div class="ui container">
     <a class="item" href="/">
       Excel To Sms
@@ -10,9 +10,11 @@
             <i class="cog icon"></i> Settings
           </button>
         {{/link-to}}
-        <button class="ui inverted secondary button item" {{action "logout"}}>
-          Logout
-        </button>
+        <div class="item">
+          <button class="ui small secondary button" {{action "logout"}}>
+            Logout
+          </button>
+        </div>
       {{else}}
         {{#link-to "login" class="item"}}
           <button class="ui {{if auth "disabled" ""}} green button">Login</button>

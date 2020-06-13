@@ -1,1 +1,39 @@
-{{outlet}}
+{{!-- template-lint-disable no-unused-block-params --}}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="ui container">
+  <div class="ui raised segment">
+    {{#if loader}}
+      <div class="ui dividing header">Done!</div>
+      <div class="ui icon message">
+        <i class="notched circle loading icon"></i>
+        <div class="content">
+          <div class="header">
+            Just one second
+          </div>
+          <p>Sending excel to server and sending sms</p>
+        </div>
+      </div>
+    {{else}}
+      <div class="ui dividing header">Upload Excel File</div>
+      {{#file-upload name="image"
+                         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                         onfileadd=(action "uploadExcel") as |queue|}}
+        <a role="button" class="ui blue button">
+          <i class="upload icon"></i> Upload File
+        </a>
+        {{this.image.name}}
+      {{/file-upload}}
+      {{#if this.image.name}}
+        <div class="ui divider"></div>
+        <button class="ui green button" {{action "send"}}>
+          Send sms
+        </button>
+      {{/if}}
+    {{/if}}
+  </div>
+</div>
