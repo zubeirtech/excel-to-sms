@@ -16,7 +16,13 @@ export default Controller.extend({
         set(image, "extension", "xlsx");
 
         try {
-          yield image.upload(`${ENV.host}/upload`);
+          const uplRes = yield image.upload(`${ENV.host}/upload`);
+          console.log(uplRes);
+          
+
+          if(uplRes.body.success) {
+            this.toast.success("Successfully uploaded file", "Upload done");
+          }
           set(this, "image", "");
           set(this, "loader", false);
         } catch (e) {

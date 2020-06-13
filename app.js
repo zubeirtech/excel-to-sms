@@ -62,30 +62,24 @@ app.post('/upload', async (req, res) => {
           if (err) {
             console.log(err);
             return res.status(500).send('Error');
-            next()
           }
-         });
-  
-        // fs.unlinkSync(uploadPath, (err) => {
-        //   if (err) {
-        //     console.error(err)
-        //     return
-        //   }
-  
-        //   //file removed
-        // })
-  
-  
-        res.status(200).send('File uploaded succesfully');
+        });
+
+        //await fs.unlinkSync(uploadPath)
+
+        res.status(200).send({
+            success: true,
+        });
     } catch (error) {
-        console.error(error);
+        res.status(500).send(error);
         // await fs.unlinkSync(uploadPath)
     }
 })
 
 app.post('/send-sms', async (req, res) => {
     try {
-        
+        const { fileName } = req.body;
+
     } catch (error) {
         throw error;
     }
