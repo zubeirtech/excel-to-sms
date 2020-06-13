@@ -9,7 +9,10 @@ const app = express();
 
 const port  = 3000;
 
+app.use(express.urlencoded({ extended: false }));
+
 app.use(cors())
+
 
 // extractExcel("Book.xlsx").then(res => {
 //     console.log(res.length);
@@ -17,25 +20,24 @@ app.use(cors())
 
 //sendSms();
 
-app.get('/token', async (req, res) => {
-    try {
+app.post('/token', async (req, res) => {
+    try {        
         const { username, password, grant_type } = req.body;
-        
         const raw = fs.readFileSync('./db.json');
         const db = JSON.parse(raw);
+
         if (grant_type === 'password') {
             if(username === db.username && password === db.password) {
-                const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' });
+                const payload = {}
+                const token = await jwt.sign(payload, process.env.JWT_SECRET);
                 res.status(200).send(`{ "access_token": "${token}"}`);
             }
         } else {
             res.status(400).send('{"error": "invalid_grant"}');
-            next(errorMessage);
         }
     } catch (error) {
         console.log(error);
         res.status(400).send('{ "error": "unsupported_grant_type" }');
-        next(errorMessage);
     }
 })
 

@@ -5,11 +5,14 @@
     </a>
     <div class="right menu">
       {{#if session.isAuthenticated}}
-        {{#link-to "settings"}}
+        {{#link-to "settings" class="item"}}
           <button class="ui blue button">
             <i class="cog icon"></i> Settings
           </button>
         {{/link-to}}
+        <button class="ui inverted secondary button item" {{action "logout"}}>
+          Logout
+        </button>
       {{else}}
         {{#link-to "login" class="item"}}
           <button class="ui {{if auth "disabled" ""}} green button">Login</button>
