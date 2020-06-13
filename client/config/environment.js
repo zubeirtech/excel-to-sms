@@ -30,6 +30,10 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.host = "http://localhost:3000"
+    ENV['ember-simple-auth'] = {
+      serverTokenEndpoint: 'http://localhost:3000/token',
+      routeAfterAuthentication: 'index'
+    };
   }
 
   if (environment === 'test') {

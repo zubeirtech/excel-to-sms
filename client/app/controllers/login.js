@@ -14,7 +14,8 @@ export default Controller.extend({
             if(this.password && this.username) {
                 this.session.authenticate('authenticator:oauth2', this.username, this.password).then(() => {
                 }).catch(reason => {
-                    set(this, 'errorMessage', reason.error || reason)   
+                    set(this, 'errorMessage', reason.error || reason);
+                    this.toastr.error('Password or username is wrong', 'Error');
                 })
             } else {
                 set(this, "auth", false);
