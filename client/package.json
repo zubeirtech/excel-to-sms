@@ -15,7 +15,8 @@
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "ember serve",
-    "test": "ember test"
+    "test": "ember test",
+    "proxy": "ember server --proxy http://localhost:3000"
   },
   "devDependencies": {
     "@ember/jquery": "^0.6.0",
@@ -41,12 +42,14 @@
     "ember-resolver": "^5.0.1",
     "ember-simple-auth": "^3.0.0",
     "ember-source": "~3.12.0",
+    "ember-toastr": "^2.0.1",
     "ember-welcome-page": "^4.0.0",
     "eslint-plugin-ember": "^6.2.0",
     "eslint-plugin-node": "^9.0.1",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.8.4",
-    "semantic-ui-ember": "^3.0.4"
+    "semantic-ui-ember": "^3.0.4",
+    "toastr": "^2.1.4"
   },
   "engines": {
     "node": "8.* || >= 10.*"
