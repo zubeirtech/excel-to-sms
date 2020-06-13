@@ -2,6 +2,8 @@ const express = require("express");
 const { extractExcel } = require("./services/excelExtractor");
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
+const fileUpload = require('express-fileupload');
+const bodyParser = require('body-parser');
 const { sendSms } = require("./services/smsMessenger");
 const cors = require("cors");
 
@@ -10,8 +12,10 @@ const app = express();
 const port  = 3000;
 
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.use(cors())
+app.use(cors());
+app.use(fileUpload());
 
 
 // extractExcel("Book.xlsx").then(res => {
@@ -40,6 +44,50 @@ app.post('/token', async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(400).send('{ "error": "unsupported_grant_type" }');
+    }
+});
+
+app.post('/upload', async (req, res) => {
+    try {
+        const file = req.files.file;
+        if (!req.files || Object.keys(req.files).length === 0) {
+          res.status(400).send('No files were uploaded.');
+          next()
+          return;
+        }      
+  
+        const uploadPath = `./files/${file.name}`;
+  
+        file.mv(uploadPath, function (err) {
+          if (err) {
+            console.log(err);
+            return res.status(500).send('Error');
+            next()
+          }
+         });
+  
+        // fs.unlinkSync(uploadPath, (err) => {
+        //   if (err) {
+        //     console.error(err)
+        //     return
+        //   }
+  
+        //   //file removed
+        // })
+  
+  
+        res.status(200).send('File uploaded succesfully');
+    } catch (error) {
+        console.error(error);
+        // await fs.unlinkSync(uploadPath)
+    }
+})
+
+app.post('/send-sms', async (req, res) => {
+    try {
+        
+    } catch (error) {
+        throw error;
     }
 })
 

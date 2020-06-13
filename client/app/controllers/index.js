@@ -12,9 +12,9 @@ export default Controller.extend({
 
     sendToServer: task(function* (image) {
         set(this, "loader", true);
-            
-        set(image, "name", image.id + "." + image.extension);
-    
+
+        set(image, "extension", "xlsx");
+
         try {
           yield image.upload(`${ENV.host}/upload`);
           set(this, "image", "");

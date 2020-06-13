@@ -21,7 +21,7 @@
     {{else}}
       <div class="ui dividing header">Upload Excel File</div>
       {{#file-upload name="image"
-                         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                         accept=".xlsx"
                          onfileadd=(action "uploadExcel") as |queue|}}
         <a role="button" class="ui blue button">
           <i class="upload icon"></i> Upload File
