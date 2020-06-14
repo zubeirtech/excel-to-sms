@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import ENV from "client/config/environment";
+import { set } from '@ember/object';
 
 export default Controller.extend({
     session: service(),
@@ -22,6 +23,8 @@ export default Controller.extend({
 
                     if(res.success) {
                         this.toastr.success("Saved changes", "Done");
+                        set(this, "username", "");
+                        set(this, "password", "");
                     }
                 } else {
                     this.toastr.error("Please fill either password or username", "Error");

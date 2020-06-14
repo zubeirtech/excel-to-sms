@@ -27,8 +27,15 @@ export default Controller.extend({
                 fileName: image.name,
                 token: this.session.data.authenticated.access_token
               }
-            })
+            });
+
+            
+
+            if(res.success) {
+              this.transitionToRoute("success");
+            }
           }
+
           set(this, "image", "");
           set(this, "loader", false);
         } catch (e) {
