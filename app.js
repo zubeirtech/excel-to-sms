@@ -9,7 +9,7 @@ const cors = require("cors");
 
 const app = express();
 
-const port  = 3000;
+const port = 3000;
 
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -24,14 +24,14 @@ app.use(fileUpload());
 
 //sendSms();
 
-app.post('/token', async (req, res) => {
-    try {        
+app.post('/token', async(req, res) => {
+    try {
         const { username, password, grant_type } = req.body;
         const raw = fs.readFileSync('./db.json');
         const db = JSON.parse(raw);
 
         if (grant_type === 'password') {
-            if(username === db.username && password === db.password) {
+            if (username === db.username && password === db.password) {
                 const payload = {
                     secret: process.env.SECRET
                 }
@@ -47,22 +47,22 @@ app.post('/token', async (req, res) => {
     }
 });
 
-app.post('/upload', async (req, res) => {
+app.post('/upload', async(req, res) => {
     try {
         const file = req.files.file;
         if (!req.files || Object.keys(req.files).length === 0) {
-          res.status(400).send('No files were uploaded.');
-          next()
-          return;
-        }      
-  
+            res.status(400).send('No files were uploaded.');
+            next()
+            return;
+        }
+
         const uploadPath = `./files/${file.name}`;
-  
-        file.mv(uploadPath, function (err) {
-          if (err) {
-            console.log(err);
-            return res.status(500).send('Error');
-          }
+
+        file.mv(uploadPath, function(err) {
+            if (err) {
+                console.log(err);
+                return res.status(500).send('Error');
+            }
         });
 
         //await fs.unlinkSync(uploadPath)
@@ -76,27 +76,54 @@ app.post('/upload', async (req, res) => {
     }
 })
 
-app.post('/send-sms', async (req, res) => {
+app.post('/send-sms', async(req, res) => {
     try {
         const { fileName } = req.body;
         const filePath = `./files/${fileName}`;
 
-        
+
         extractExcel("Book.xlsx").then(nums => {
             console.log(nums);
-            
+
             //sendSms(nums);
         });
         fs.unlinkSync(filePath, (err) => {
             if (err) {
-              console.error(err)
-              return
-            }    
-        })
-        res.status(200).send({message: "Done"});
+                console.error(err)
+                return
+            }
+        });
+        res.status(200).send({ success: true });
 
     } catch (error) {
+        res.status(500).send(error);
         throw error;
+    }
+});
+
+
+app.post('/credentials', async(req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        const rawdata = fs.readFileSync('db.json');
+        const db = JSON.parse(rawdata);
+        
+        if(username) {
+            db.username = username;
+        }
+
+        if(password) {
+            db.password = password;
+        }
+
+        fs.writeFileSync('db.json', JSON.stringify(db));
+
+        res.status(200).send({ success: true });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
     }
 })
 
