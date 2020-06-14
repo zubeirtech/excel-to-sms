@@ -23,12 +23,6 @@ app.use(bodyParser.json());
 
 app.use(fileUpload());
 
-
-// extractExcel("Book.xlsx").then(res => {
-    //     console.log(res.length);
-    // })
-    
-    //sendSms();
     
     app.get('/debug-sentry', function mainHandler(req, res) {
         throw new Error('My first Sentry error!');
