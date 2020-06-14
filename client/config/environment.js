@@ -49,6 +49,11 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    ENV.host = "https://excel-to-sms.herokuapp.com"
+    ENV['ember-simple-auth'] = {
+      serverTokenEndpoint: 'https://excel-to-sms.herokuapp.com/token',
+      routeAfterAuthentication: 'index'
+    };
     // here you can enable a production-specific feature
   }
 
