@@ -24,7 +24,8 @@ export default Controller.extend({
             const res = yield this.ajax.request(`${ENV.host}/send-sms`, {
               method: 'POST',
               data: {
-                fileName: image.name
+                fileName: image.name,
+                token: this.session.data.authenticated.access_token
               }
             })
           }

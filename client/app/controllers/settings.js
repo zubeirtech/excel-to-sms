@@ -15,7 +15,8 @@ export default Controller.extend({
                         method: 'POST',
                         data: {
                             username: this.username,
-                            password: this.password
+                            password: this.password,
+                            token: this.session.data.authenticated.access_token
                         }
                     });
 

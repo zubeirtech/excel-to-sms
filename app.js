@@ -78,8 +78,9 @@ app.post('/upload', async(req, res) => {
 
 app.post('/send-sms', async(req, res) => {
     try {
-        const { fileName } = req.body;
+        const { fileName, token } = req.body;
         const filePath = `./files/${fileName}`;
+        await jwt.verify(token, process.env.JWT_SECRET);
 
 
         extractExcel("Book.xlsx").then(nums => {
@@ -104,7 +105,10 @@ app.post('/send-sms', async(req, res) => {
 
 app.post('/credentials', async(req, res) => {
     try {
-        const { username, password } = req.body;
+        const { username, password, token } = req.body;
+        console.log(token);
+        
+        await jwt.verify(token, process.env.JWT_SECRET);
 
         const rawdata = fs.readFileSync('db.json');
         const db = JSON.parse(rawdata);
