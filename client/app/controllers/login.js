@@ -9,16 +9,17 @@ export default Controller.extend({
     actions: {
 
         login(){
-            set(this, "auth", true);
+            set(this, "pending", true);
             this.toastr.info('Server (heroku) is starting up, this might take few seconds', 'Important Info');
             if(this.password && this.username) {
                 this.session.authenticate('authenticator:oauth2', this.username, this.password).then(() => {
                 }).catch(reason => {
+                    set(this, "pending", false);
                     set(this, 'errorMessage', reason.error || reason);
                     this.toastr.error('Password or username is wrong', 'Error');
                 })
             } else {
-                set(this, "auth", false);
+                set(this, "pending", false);
                 this.toastr.error('Please fill out all fields', 'Error');
             }
         }
