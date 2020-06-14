@@ -8,18 +8,18 @@ export default Controller.extend({
     toastr: service('toast'),
 
     actions: {
-        save() {
+        async save() {
             try {
                 if(this.username || this.password) {
-                    const res = await this.ajax.request(`${ENV.host}/change-credentials`, {
+                    const res = await this.ajax.request(`${ENV.host}/credentials`, {
                         method: 'POST',
                         data: {
                             username: this.username,
                             password: this.password
                         }
-                    })
+                    });
 
-                    if(res.body.success) {
+                    if(res.success) {
                         this.toastr.success("Saved changes", "Done");
                     }
                 } else {
