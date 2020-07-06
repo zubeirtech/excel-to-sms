@@ -83,16 +83,12 @@ app.use(fileUpload());
 })
 
 app.post('/send-sms', async(req, res) => {
-    try {
-        const { fileName, token } = req.body;
+    try {        
+        const { fileName, message } = req.body;
         const filePath = `./files/${fileName}`;
-        await jwt.verify(token, process.env.JWT_SECRET);
         
-        
-        extractExcel("Book.xlsx").then(nums => {
-            console.log(nums);
-            
-            //sendSms(nums);
+        extractExcel(fileName).then(nums => {
+            //sendSms(nums, message);
         });
         fs.unlinkSync(filePath, (err) => {
             if (err) {
