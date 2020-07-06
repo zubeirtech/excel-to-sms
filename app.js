@@ -55,7 +55,7 @@ app.use(fileUpload());
     
     app.post('/upload', async(req, res) => {
         try {
-        const file = req.files.file;
+            const file = req.files.file;
         if (!req.files || Object.keys(req.files).length === 0) {
             res.status(400).send('No files were uploaded.');
             next()
